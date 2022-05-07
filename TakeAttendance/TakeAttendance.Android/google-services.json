@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "598088678796",
+    "project_id": "tnattendance-babd3",
+    "storage_bucket": "tnattendance-babd3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:598088678796:android:29180e881c8d4aec286aa9",
+        "android_client_info": {
+          "package_name": "com.companyname.takeattendance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "598088678796-t9ms17tmk7ttjho5g4c7mgqol2ndbe5f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-Cot8lQxpOKKgAuVjr-jTR1D13Fi0stE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "598088678796-t9ms17tmk7ttjho5g4c7mgqol2ndbe5f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

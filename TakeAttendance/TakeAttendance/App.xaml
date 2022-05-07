@@ -4,5 +4,21 @@
              x:Class="TakeAttendance.App">
     <Application.Resources>
 
+        <ResourceDictionary>
+            <Color x:Key="buttonColor">#1B94FF</Color>
+            <Color x:Key="whiteColor">#FFFFFF</Color>
+
+            <!--Implicit Style-->
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource buttonColor}"/>
+                <Setter Property="TextColor" Value="{StaticResource whiteColor}" />
+            </Style>
+
+            <!--Explicit Style-->
+            <Style x:Key="homeLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource buttonColor}" />
+            </Style>
+        </ResourceDictionary>
+
     </Application.Resources>
 </Application>

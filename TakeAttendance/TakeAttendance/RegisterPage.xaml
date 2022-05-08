@@ -28,6 +28,11 @@
                     Text="Register"
                     Clicked="registerButton_Clicked" />
 
+        <Button x:Name="goBackToLoginButton"
+                    Margin="0, 40, 0, 0"
+                    Text="Go back to Login page"
+                    Clicked="goBackToLoginButton_Clicked" />
+
     </StackLayout>
     
 </ContentPage>

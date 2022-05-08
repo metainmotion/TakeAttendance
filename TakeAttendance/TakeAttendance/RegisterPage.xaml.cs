@@ -4,21 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TakeAttendance.Helpers;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace TakeAttendance
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class RegisterPage : ContentPage
     {
-        public LoginPage()
+        public RegisterPage()
         {
             InitializeComponent();
         }
 
-        private async void loginButton_Clicked(object sender, EventArgs e)
+        private async void registerButton_Clicked(object sender, EventArgs e)
         {
             bool isEmailEmpty = string.IsNullOrEmpty(username.Text);
             bool isPasswordEmpty = string.IsNullOrEmpty(password.Text);
@@ -29,20 +28,17 @@ namespace TakeAttendance
                 Console.WriteLine("Empty field");
 
             }
-            else 
+            else
             {
                 //Authenticate
-                bool result = await Auth.LoginUser(username.Text, password.Text);
+                bool result = await Auth.RegisterUser(username.Text, password.Text);
 
                 //Navigate to Home Page
                 if (result)
-                   await Navigation.PushAsync(new HomePage());
+                    await App.Current.MainPage.DisplayAlert("Congrats", "You Registered", "Cool");
             }
-        }
 
-        private void registrationButton_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new RegistrationPassword());
+            
         }
     }
 }

@@ -1,38 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TakeAttendance.LoginPage">
-
+             x:Class="TakeAttendance.RegisterPage">
+    
     <StackLayout VerticalOptions="Center" Margin="20">
 
-            <Image Source="https://quatangconggiao.net/wp-content/uploads/2019/08/logo-thieu-nhi-thanh-the2.jpg" />
+        <Image Source="https://quatangconggiao.net/wp-content/uploads/2019/08/logo-thieu-nhi-thanh-the2.jpg" />
 
-            <Label x:Name="loginTitle" 
-                   Text="Attendance Login Page" 
+        <Label x:Name="registerTitle" 
+                   Text="HT Registration Page" 
                    FontSize="Title" 
                    Style="{StaticResource homeLabel}"
                    FontAttributes="Bold" 
                    HorizontalTextAlignment="Center" 
                    />
 
-            <Entry x:Name="username"
+        <Entry x:Name="username"
                    Placeholder="Username"
                    Keyboard="Email" />
 
-            <Entry x:Name="password"
+        <Entry x:Name="password"
                    Placeholder="Password"
                    IsPassword="True" />
 
-            <Button x:Name="loginButton"
-                    Margin="0, 40, 0, 0"
-                    Text="Login"
-                    Clicked="loginButton_Clicked" />
-
-            <Button x:Name="registrationButton"
+        <Button x:Name="registerButton"
                     Margin="0, 40, 0, 0"
                     Text="Register"
-                    Clicked="registrationButton_Clicked" />
+                    Clicked="registerButton_Clicked" />
 
     </StackLayout>
-  
+    
 </ContentPage>

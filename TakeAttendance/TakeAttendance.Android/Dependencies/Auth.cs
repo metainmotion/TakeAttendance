@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Firebase.Auth;
 using static TakeAttendance.Helpers.Auth;
 
 [assembly: Dependency(typeof(TakeAttendance.Droid.Dependencies.Auth))]
@@ -20,22 +21,56 @@ namespace TakeAttendance.Droid.Dependencies
     {
         public string GetCurrentUserId()
         {
-            throw new NotImplementedException();
+            return Firebase.Auth.FirebaseAuth.Instance.CurrentUser.Uid;
         }
 
         public bool isAuthenticated()
         {
-            throw new NotImplementedException();
+            return FirebaseAuth.Instance.CurrentUser != null;
         }
 
         public async Task<bool> LoginUser(string username, string password)
         {
-            throw new NotImplementedException();
+            try
+            {
+               await FirebaseAuth.Instance.SignInWithEmailAndPasswordAsync(username, password);    
+               
+               return true;
+            }
+            catch(FirebaseAuthInvalidCredentialsException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            catch (FirebaseAuthInvalidUserException ex)
+            {
+                throw new Exception(ex.Message); 
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("There was an error");
+            }
         }
 
         public async Task<bool> RegisterUser(string username, string password)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await FirebaseAuth.Instance.CreateUserWithEmailAndPasswordAsync(username, password);
+
+                return true;
+            }
+            catch(FirebaseAuthWeakPasswordException ex)
+            {
+                throw new Exception(ex.Message); 
+            }
+            catch(FirebaseAuthUserCollisionException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Could not register. Please be sure that you are registering with a valid address");
+            }
         }
     }
 }

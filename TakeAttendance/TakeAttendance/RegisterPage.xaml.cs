@@ -33,7 +33,6 @@ namespace TakeAttendance
                 //Authenticate
                 bool result = await Auth.RegisterUser(username.Text, password.Text);
 
-                //Navigate to Home Page
                 if (result)
                     await App.Current.MainPage.DisplayAlert("Congrats", "You Registered", "Cool");
             }

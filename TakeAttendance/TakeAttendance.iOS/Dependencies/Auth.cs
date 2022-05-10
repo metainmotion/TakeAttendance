@@ -38,7 +38,10 @@ namespace TakeAttendance.iOS.Dependencies
             }
             catch (NSErrorException error)
             {
-                throw new Exception(error.Message);
+                string message = error.Message.Substring(error.Message.IndexOf("NSLocalizedDescription="), (int)StringComparison.CurrentCulture);
+                message = message.Replace("NSLocalizedDescription=", "").Split('.')[0];
+                throw new Exception(message);
+             
             }
             catch (Exception ex)
             {
@@ -56,11 +59,13 @@ namespace TakeAttendance.iOS.Dependencies
             }
             catch (NSErrorException error)
             {
-                throw new Exception(error.Message);
+                string message = error.Message.Substring(error.Message.IndexOf("NSLocalizedDescription="), (int)StringComparison.CurrentCulture);
+                message = message.Replace("NSLocalizedDescription=", "").Split('.')[0];
+                throw new Exception(message);
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception("Could not register. Please be sure that you are registering with a valid address");
             }
         }
     }

@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Firebase.Auth;
-using static TakeAttendance.Helpers.Auth;
+using TakeAttendance.Helpers;
 
 [assembly: Dependency(typeof(TakeAttendance.Droid.Dependencies.Auth))]
 namespace TakeAttendance.Droid.Dependencies

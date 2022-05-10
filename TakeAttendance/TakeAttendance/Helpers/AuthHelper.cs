@@ -6,15 +6,17 @@ using Xamarin.Forms;
 
 namespace TakeAttendance.Helpers
 {
-    public class Auth
+
+    public interface IAuth
     {
-        public interface IAuth
-        {
-            Task<bool> RegisterUser(string username, string password);
-            Task<bool> LoginUser(string username, string password);
-            bool isAuthenticated();
-            string GetCurrentUserId();
-        }
+        Task<bool> RegisterUser(string username, string password);
+        Task<bool> LoginUser(string username, string password);
+        bool isAuthenticated();
+        string GetCurrentUserId();
+    }
+
+    public class Auth
+    { 
 
         private static IAuth auth = DependencyService.Get<IAuth>(); //Searching for the exports of the interface
 

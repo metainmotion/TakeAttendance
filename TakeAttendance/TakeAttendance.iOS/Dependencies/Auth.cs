@@ -8,6 +8,7 @@ using TakeAttendance.Helpers;
 using static TakeAttendance.Helpers.Auth;
 using Xamarin.Forms;
 using System.Threading.Tasks;
+using TakeAttendance.Helpers;
 
 [assembly: Dependency(typeof(TakeAttendance.iOS.Dependencies.Auth))] //Exporting the dependency so the Auth Helpers can reference
 namespace TakeAttendance.iOS.Dependencies

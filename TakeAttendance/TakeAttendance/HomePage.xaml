@@ -6,12 +6,12 @@
 
     <TabbedPage.ToolbarItems>
         <ToolbarItem x:Name="registerStudent"
-                     Text="Register" 
+                     Text="Register Student" 
                      Clicked="registerStudent_Clicked" 
                      />
     </TabbedPage.ToolbarItems>
 
-    <local:StudentDirectoryPage Title="Student&#x0a;Directory" />
+    <local:StudentDirectoryPage Title="Student&#x0a;Directory" IconImageSource="https://quatangconggiao.net/wp-content/uploads/2019/08/logo-thieu-nhi-thanh-the2.jpg" />
     <local:WeeklyAttendancePage Title="Weekly&#x0a;Attendance" />
     <local:StudentProfilePage Title="Student&#x0a;Profile" />
 

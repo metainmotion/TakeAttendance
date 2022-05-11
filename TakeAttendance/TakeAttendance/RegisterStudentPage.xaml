@@ -7,6 +7,17 @@
             <Label Text="Welcome to Registration Page!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+
+            <Entry x:Name="username" Placeholder="Enter Username" />
+
+            <Entry x:Name="firstname" Placeholder="Enter First Name" />
+            
+            <Entry x:Name="lastname" Placeholder="Enter Last Name" />
+
+            <Button x:Name="registerStudentButton"
+                    Margin="0, 40, 0, 0"
+                    Text="Register Student"
+                    Clicked="registerStudentButton_Clicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

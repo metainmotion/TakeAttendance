@@ -9,7 +9,7 @@ namespace TakeAttendance.Helpers
    public interface IFirestore
     {
         Task<List<Student>> Read();
-        Task<bool> RegisterStudent(Student student);
+        bool RegisterStudent(Student student);
         Task<bool> Update(Student student); 
         Task<bool> Delete(Student student);
     }
@@ -22,9 +22,9 @@ namespace TakeAttendance.Helpers
             return await firestore.Read();
         }
 
-        public static async Task<bool> RegisterStudent(Student student)
+        public static bool RegisterStudent(Student student)
         {
-            return await firestore.RegisterStudent(student);
+            return firestore.RegisterStudent(student);
         }
 
         public static async Task<bool> Update(Student student)

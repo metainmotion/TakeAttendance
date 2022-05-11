@@ -7,29 +7,135 @@ using System.Threading.Tasks;
 using TakeAttendance.Helpers;
 using Xamarin.Forms;
 
+
 [assembly: Dependency(typeof(TakeAttendance.iOS.Dependencies.Firestore))]
 namespace TakeAttendance.iOS.Dependencies
 {
-    internal class Firestore : IFirestore
+    public class Firestore : IFirestore
     {
-        public Task<bool> Delete(Student student)
+        public async Task<bool> Delete(Student student)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var collection = Firebase.CloudFirestore.Firestore.SharedInstance.GetCollection("students");
+
+                await collection.GetDocument(student.Id).DeleteDocumentAsync();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
         }
 
-        public Task<List<Student>> Read()
+        public async Task<List<Student>> Read()
         {
-            throw new NotImplementedException();
+            try 
+            {
+                var collection = Firebase.CloudFirestore.Firestore.SharedInstance.GetCollection("students");
+                var query = collection.WhereEqualsTo("modifiedby", Firebase.Auth.Auth.DefaultInstance.CurrentUser.Uid);
+                var documents = await query.GetDocumentsAsync();
+
+                List<Student> students = new List<Student>();
+
+                foreach (var doc in documents.Documents)
+                {
+                    var studentdict = doc.Data;
+
+                    var student = new Student()
+                    {
+                        Username = studentdict.ValueForKey(new NSString("username")) as NSString,
+                        UserId = studentdict.ValueForKey(new NSString("userid")) as NSString,
+                        FirstName = studentdict.ValueForKey(new NSString("firstname")) as NSString,
+                        LastName = studentdict.ValueForKey(new NSString("lastname")) as NSString,
+                        ModifiedBy = studentdict.ValueForKey(new NSString("modifiedby")) as NSString,
+                        Id = doc.Id
+                    };
+
+                    students.Add(student);
+                }
+
+                return students; 
+            }
+            catch (Exception ex)
+            {
+                return new List<Student>();
+            }
+            
         }
 
-        public Task<bool> RegisterStudent(Student student)
+        public bool RegisterStudent(Student student)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var keys = new[]
+                {
+                    new NSString("username"),
+                    new NSString("userid"),
+                    new NSString("firstname"),
+                    new NSString("lastname"),
+                    new NSString("modifiedby"),
+                };
+
+                var values = new NSObject[]
+                {
+                    new NSString(student.Username),
+                    new NSString(student.UserId),
+                    new NSString(student.FirstName),
+                    new NSString(student.LastName),
+                    new NSString(Firebase.Auth.Auth.DefaultInstance.CurrentUser.Uid)
+                };
+
+                var document = new NSDictionary<NSString, NSObject>(keys, values);
+
+                var collection = Firebase.CloudFirestore.Firestore.SharedInstance.GetCollection("students");
+
+                collection.AddDocument(document);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
-        public Task<bool> Update(Student student)
+        public async Task<bool> Update(Student student)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var keys = new[]
+                {
+                    new NSString("username"),
+                    new NSString("userid"),
+                    new NSString("firstname"),
+                    new NSString("lastname"),
+                    new NSString("modifiedby"),
+                };
+
+                var values = new NSObject[]
+                {
+                    new NSString(student.Username),
+                    new NSString(student.UserId),
+                    new NSString(student.FirstName),
+                    new NSString(student.LastName),
+                    new NSString(Firebase.Auth.Auth.DefaultInstance.CurrentUser.Uid)
+                };
+
+                var document = new NSDictionary<NSObject, NSObject>(keys, values);
+
+                var collection = Firebase.CloudFirestore.Firestore.SharedInstance.GetCollection("students");
+
+                await collection.GetDocument(student.Id).UpdateDataAsync(document);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

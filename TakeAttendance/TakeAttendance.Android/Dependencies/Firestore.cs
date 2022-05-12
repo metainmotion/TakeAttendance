@@ -83,7 +83,7 @@ namespace TakeAttendance.Droid.Dependencies
 
             var collection = Firebase.Firestore.FirebaseFirestore.Instance.Collection("students");
 
-            var query = collection.WhereEqualTo("modifiedby", Firebase.Auth.FirebaseAuth.Instance.CurrentUser.Uid);
+            var query = collection.WhereEqualTo("modifiedby", Firebase.Auth.FirebaseAuth.Instance.CurrentUser.Email);
 
             query.Get().AddOnCompleteListener(this);
 
@@ -108,7 +108,7 @@ namespace TakeAttendance.Droid.Dependencies
                     {"firstname", student.FirstName },
                     {"lastname", student.LastName },
                     {"created" , DateTime.Now.ToShortDateString()},
-                    {"modifiedby", Firebase.Auth.FirebaseAuth.Instance.CurrentUser.Uid }
+                    {"modifiedby", Firebase.Auth.FirebaseAuth.Instance.CurrentUser.Email }
                 };
 
                 var collection = Firebase.Firestore.FirebaseFirestore.Instance.Collection("students");
@@ -134,7 +134,7 @@ namespace TakeAttendance.Droid.Dependencies
                     {"firstname", student.FirstName },
                     {"lastname", student.LastName },
                     {"created" , student.Created},
-                    {"modifiedby", Firebase.Auth.FirebaseAuth.Instance.CurrentUser.Uid }
+                    {"modifiedby", Firebase.Auth.FirebaseAuth.Instance.CurrentUser.Email }
                 };
 
                 var collection = Firebase.Firestore.FirebaseFirestore.Instance.Collection("students");

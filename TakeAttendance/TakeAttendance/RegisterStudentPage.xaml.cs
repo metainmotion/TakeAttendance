@@ -54,5 +54,10 @@ namespace TakeAttendance
         {
             Navigation.PushAsync(new HomePage());
         }
+
+        private void toolbarHome_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new HomePage());
+        }
     }
 }

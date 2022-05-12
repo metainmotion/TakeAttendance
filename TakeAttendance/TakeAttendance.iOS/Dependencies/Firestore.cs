@@ -35,7 +35,7 @@ namespace TakeAttendance.iOS.Dependencies
             try 
             {
                 var collection = Firebase.CloudFirestore.Firestore.SharedInstance.GetCollection("students");
-                var query = collection.WhereEqualsTo("modifiedby", Firebase.Auth.Auth.DefaultInstance.CurrentUser.Uid);
+                var query = collection.WhereEqualsTo("modifiedby", Firebase.Auth.Auth.DefaultInstance.CurrentUser.Email);
                 var documents = await query.GetDocumentsAsync();
 
                 List<Student> students = new List<Student>();
@@ -88,7 +88,7 @@ namespace TakeAttendance.iOS.Dependencies
                     new NSString(student.FirstName),
                     new NSString(student.LastName),
                     new NSString(DateTime.Now.ToShortDateString()),
-                    new NSString(Firebase.Auth.Auth.DefaultInstance.CurrentUser.Uid)
+                    new NSString(Firebase.Auth.Auth.DefaultInstance.CurrentUser.Email)
                 };
 
                 var document = new NSDictionary<NSString, NSObject>(keys, values);
@@ -126,7 +126,7 @@ namespace TakeAttendance.iOS.Dependencies
                     new NSString(student.FirstName),
                     new NSString(student.LastName),
                     new NSString(student.Created),
-                    new NSString(Firebase.Auth.Auth.DefaultInstance.CurrentUser.Uid)
+                    new NSString(Firebase.Auth.Auth.DefaultInstance.CurrentUser.Email)
                 };
 
                 var document = new NSDictionary<NSObject, NSObject>(keys, values);

@@ -2,11 +2,21 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TakeAttendance.StudentProfilePage">
-    <ContentPage.Content>
+    
         <StackLayout>
-            <Label Text="Welcome to Student Profile!"
+            <Label x:Name="StudentProfileHeader" Text="Welcome to Student Profile!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+
+        <Button x:Name="updateButton"
+                Margin="0, 40, 0, 0"
+                Text="Update Profile"
+                Clicked="updateButton_Clicked" />
+
+        <Button x:Name="deleteButton"
+                Margin="0, 40, 0, 0"
+                Text="Delete Em"
+                Clicked="deleteButton_Clicked" />
+    </StackLayout>
+    
 </ContentPage>

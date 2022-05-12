@@ -7,7 +7,7 @@
             <Label Text="Welcome to the Student Directory!"
                    HorizontalOptions="Center" />
 
-            <ListView x:Name="listOfStudents">
+            <ListView x:Name="listOfStudents" ItemSelected="listOfStudents_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding Username}"/>

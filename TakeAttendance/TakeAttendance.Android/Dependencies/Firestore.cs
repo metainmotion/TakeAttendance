@@ -19,7 +19,7 @@ using Java.Interop;
 [assembly: Dependency(typeof(TakeAttendance.Droid.Dependencies.Firestore))]
 namespace TakeAttendance.Droid.Dependencies
 {
-    public class Firestore : IFirestore, IOnCompleteListener
+    public class Firestore : Java.Lang.Object, IFirestore, IOnCompleteListener 
     {
         List<Student> students;
         bool hasReadStudents = false;
@@ -28,21 +28,12 @@ namespace TakeAttendance.Droid.Dependencies
         {
             students = new List<Student>();
         }
-        public IntPtr Handle => throw new NotImplementedException();
-
-        public int JniIdentityHashCode => throw new NotImplementedException();
-
-        public JniObjectReference PeerReference => throw new NotImplementedException();
-
-        public JniPeerMembers JniPeerMembers => throw new NotImplementedException();
-
-        public JniManagedPeerStates JniManagedPeerState => throw new NotImplementedException();
 
         public async Task<bool> Delete(Student student)
         {
             try
             {
-                var collection = Firebase.Firestore.FirebaseFirestore.Instance.Collection("students");
+                var collection = FirebaseFirestore.Instance.Collection("students");
 
                 collection.Document(student.Id).Delete();
 
@@ -52,26 +43,6 @@ namespace TakeAttendance.Droid.Dependencies
             {
                 return false;
             }
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Disposed()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DisposeUnlessReferenced()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Finalized()
-        {
-            throw new NotImplementedException();
         }
 
         public void OnComplete(Android.Gms.Tasks.Task task)
@@ -87,9 +58,10 @@ namespace TakeAttendance.Droid.Dependencies
                     Student student = new Student()
                     {
                         Username = doc.Get("username").ToString(),
-                        UserId = doc.Get("userid").ToString(),
+                        Phone = doc.Get("phone").ToString(),
                         FirstName = doc.Get("firstname").ToString(),
                         LastName = doc.Get("lastname").ToString(),
+                        Created = doc.Get("created").ToString(),
                         ModifiedBy = doc.Get("modifiedby").ToString(),
                         Id = doc.Id
                     };
@@ -115,7 +87,7 @@ namespace TakeAttendance.Droid.Dependencies
 
             query.Get().AddOnCompleteListener(this);
 
-            for(int i = 0; i < 40; i++)
+            for(int i = 0; i < 20; i++)
             {
                 await System.Threading.Tasks.Task.Delay(100);
                 if (hasReadStudents)
@@ -132,9 +104,10 @@ namespace TakeAttendance.Droid.Dependencies
                 Dictionary<string, Java.Lang.Object> studentdict = new Dictionary<string, Java.Lang.Object>
                 {
                     {"username", student.Username },
-                    {"userid", student.UserId },
+                    {"phone", student.Phone },
                     {"firstname", student.FirstName },
                     {"lastname", student.LastName },
+                    {"created" , DateTime.Now.ToShortDateString()},
                     {"modifiedby", Firebase.Auth.FirebaseAuth.Instance.CurrentUser.Uid }
                 };
 
@@ -149,27 +122,7 @@ namespace TakeAttendance.Droid.Dependencies
                 return false;
             }
         }
-
-        public void SetJniIdentityHashCode(int value)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetJniManagedPeerState(JniManagedPeerStates value)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetPeerReference(JniObjectReference reference)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UnregisterFromRuntime()
-        {
-            throw new NotImplementedException();
-        }
-
+    
         public async Task<bool> Update(Student student)
         {
             try
@@ -177,9 +130,10 @@ namespace TakeAttendance.Droid.Dependencies
                 var studentdict = new Dictionary<string, Java.Lang.Object>
                 {
                     {"username", student.Username },
-                    {"userid", student.UserId },
+                    {"phone", student.Phone },
                     {"firstname", student.FirstName },
                     {"lastname", student.LastName },
+                    {"created" , student.Created},
                     {"modifiedby", Firebase.Auth.FirebaseAuth.Instance.CurrentUser.Uid }
                 };
 

@@ -8,16 +8,21 @@
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
 
-            <Entry x:Name="username" Placeholder="Enter Username" />
-
             <Entry x:Name="firstname" Placeholder="Enter First Name" />
             
             <Entry x:Name="lastname" Placeholder="Enter Last Name" />
+
+            <Entry x:Name="phone" Placeholder="Enter Phone Number" Keyboard="Telephone" MaxLength="10" />
 
             <Button x:Name="registerStudentButton"
                     Margin="0, 40, 0, 0"
                     Text="Register Student"
                     Clicked="registerStudentButton_Clicked" />
+
+            <Button x:Name="goBackHome"
+                Margin="0, 40, 0, 0"
+                Text="Go Back to Home Page"
+                Clicked="goBackHome_Clicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

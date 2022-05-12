@@ -47,10 +47,11 @@ namespace TakeAttendance.iOS.Dependencies
                     var student = new Student()
                     {
                         Username = studentdict.ValueForKey(new NSString("username")) as NSString,
-                        UserId = studentdict.ValueForKey(new NSString("userid")) as NSString,
+                        Phone = studentdict.ValueForKey(new NSString("phone")) as NSString,
                         FirstName = studentdict.ValueForKey(new NSString("firstname")) as NSString,
                         LastName = studentdict.ValueForKey(new NSString("lastname")) as NSString,
                         ModifiedBy = studentdict.ValueForKey(new NSString("modifiedby")) as NSString,
+                        Created = studentdict.ValueForKey(new NSString("created")) as NSString,
                         Id = doc.Id
                     };
 
@@ -73,18 +74,20 @@ namespace TakeAttendance.iOS.Dependencies
                 var keys = new[]
                 {
                     new NSString("username"),
-                    new NSString("userid"),
+                    new NSString("phone"),
                     new NSString("firstname"),
                     new NSString("lastname"),
+                    new NSString("created"),
                     new NSString("modifiedby"),
                 };
 
                 var values = new NSObject[]
                 {
                     new NSString(student.Username),
-                    new NSString(student.UserId),
+                    new NSString(student.Phone),
                     new NSString(student.FirstName),
                     new NSString(student.LastName),
+                    new NSString(DateTime.Now.ToShortDateString()),
                     new NSString(Firebase.Auth.Auth.DefaultInstance.CurrentUser.Uid)
                 };
 
@@ -109,18 +112,20 @@ namespace TakeAttendance.iOS.Dependencies
                 var keys = new[]
                 {
                     new NSString("username"),
-                    new NSString("userid"),
+                    new NSString("phone"),
                     new NSString("firstname"),
                     new NSString("lastname"),
+                    new NSString("created"),
                     new NSString("modifiedby"),
                 };
 
                 var values = new NSObject[]
                 {
                     new NSString(student.Username),
-                    new NSString(student.UserId),
+                    new NSString(student.Phone),
                     new NSString(student.FirstName),
                     new NSString(student.LastName),
+                    new NSString(student.Created),
                     new NSString(Firebase.Auth.Auth.DefaultInstance.CurrentUser.Uid)
                 };
 

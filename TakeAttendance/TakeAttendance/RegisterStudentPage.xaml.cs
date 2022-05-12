@@ -19,25 +19,40 @@ namespace TakeAttendance
 
         public void registerStudentButton_Clicked(object sender, EventArgs e)
         {
-            var student = new Student()
+            try
             {
-                Id = "fdafdsafdsa",
-                UserId = "4543543",
-                Username = "Jodangggg",
-                FirstName = "johnny",
-                LastName = "Dangggg"
-            };
+                var student = new Student()
+                {
+                    Username = $"{(firstname.Text.Length >= 2 ? firstname.Text.Substring(0, 2) : firstname.Text)}{(lastname.Text.Length >= 5 ? lastname.Text.Substring(0, 5) : lastname.Text)}{(phone.Text.Length > 0 ? phone.Text.Substring(3, 7) : phone.Text)}",
+                    FirstName = firstname.Text,
+                    LastName = lastname.Text,
+                    Phone = phone.Text.Length > 0 ? phone.Text : ""
+                };
 
-            bool result = FirestoreHelper.RegisterStudent(student);
+                bool result = FirestoreHelper.RegisterStudent(student);
 
-            if(result)
-            {
-                DisplayAlert("Success", "Student has been registered", "Ok");
+                if (result)
+                {
+                    DisplayAlert("Success", "Student has been registered", "Ok");
+                    firstname.Text = "";
+                    lastname.Text = "";
+                    phone.Text = "";
+                }
+                else
+                {
+                    DisplayAlert("Failed", "Student has not been registered", "Ok");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                DisplayAlert("Failed", "Student has not been registered", "Ok");
+                DisplayAlert("Error", "Do not leave fields blank", "Ok");
             }
+
+        }
+
+        private void goBackHome_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new HomePage());
         }
     }
 }

@@ -15,7 +15,7 @@ namespace TakeAttendance.Helpers
     }
    public class FirestoreHelper
     {
-        private static IFirestore firestore = DependencyService.Get<IFirestore>();
+        public static IFirestore firestore = DependencyService.Get<IFirestore>();
 
         public static async Task<List<Student>> Read()
         {

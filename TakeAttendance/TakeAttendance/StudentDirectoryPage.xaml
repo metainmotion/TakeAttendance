@@ -5,13 +5,12 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Welcome to the Student Directory!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+                   HorizontalOptions="Center" />
 
             <ListView x:Name="listOfStudents">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding UserName}"/>
+                        <TextCell Text="{Binding Username}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

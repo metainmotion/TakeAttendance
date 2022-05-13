@@ -3,20 +3,84 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TakeAttendance.StudentProfilePage">
     
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="toolbarHome"
+                     Text="Go Back to Home Page" 
+                     Clicked="toolbarHome_Clicked" 
+                     />
+    </ContentPage.ToolbarItems>
+    <ScrollView x:Name="updateView">
         <StackLayout>
-            <Label x:Name="StudentProfileHeader" Text="Welcome to Student Profile!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label x:Name="StudentProfileHeader" 
+                    HorizontalOptions="CenterAndExpand" />
 
-        <Button x:Name="updateButton"
-                Margin="0, 40, 0, 0"
-                Text="Update Profile"
-                Clicked="updateButton_Clicked" />
+            <Entry x:Name="firstname" Placeholder="First Name" Margin="0, 10, 0, 0"  />
 
-        <Button x:Name="deleteButton"
-                Margin="0, 40, 0, 0"
-                Text="Delete Em"
-                Clicked="deleteButton_Clicked" />
-    </StackLayout>
-    
+            <Entry x:Name="lastname" Placeholder="Last Name" Margin="0, 10, 0, 0"  />
+
+            <Label Text="Birth Date"  Margin="5, 25, 0, 0" />
+            <DatePicker x:Name="birthdate"  />
+
+            <Label x:Name="emergencyAndContact"
+                   Text="Emergency and Contact"
+                    HorizontalOptions="CenterAndExpand" />
+
+            <Entry x:Name="parentg1" Placeholder="Parent or Guardian Full Name"  Margin="0, 25, 0, 0"  />
+
+            <Entry x:Name="phone" Placeholder="Phone Number" Keyboard="Telephone" MaxLength="10" Margin="0, 25, 0, 0"  />
+
+            <Entry x:Name="parentg2" Placeholder="Parent or Guardian Full Name" Margin="0, 25, 0, 0"  />
+
+            <Entry x:Name="altphone" Placeholder="Secondary Phone Number" Keyboard="Telephone" MaxLength="10" Margin="0, 25, 0, 0"  />
+
+            <Entry x:Name="email" Placeholder="Email Address" Keyboard="Email" MaxLength="100" Margin="0, 25, 0, 0"  />
+
+            <Picker x:Name="nganh" Title="Select Nganh" Margin="0, 25, 0, 0"   >
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Au Nhi</x:String>
+                        <x:String>Thieu Nhi</x:String>
+                        <x:String>Nghia Si</x:String>
+                        <x:String>Hiep Si</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Label x:Name="cap"
+                   Text="Cap:"/>
+
+            <Picker x:Name="chidoan" Title="Select Chi Doan" Margin="0, 25, 0, 0"  >
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:Int32}">
+                        <x:Int32>1</x:Int32>
+                        <x:Int32>2</x:Int32>
+                        <x:Int32>3</x:Int32>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Entry x:Name="medical" Placeholder="Medical Conditions" Margin="0, 25, 0, 0"   />
+
+            <Picker x:Name="paidstat" Title="Paid Status"  Margin="0, 25, 0, 0" >
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Paid</x:String>
+                        <x:String>Unpaid</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Entry x:Name="comments" Placeholder="Comments" MaxLength="250" Margin="0, 25, 0, 0"   MinimumHeightRequest="100"/>
+
+            <Button x:Name="updateButton"
+                    Margin="0, 40, 0, 0"
+                    Text="Update Profile"
+                    Clicked="updateButton_Clicked" />
+
+            <Button x:Name="deleteButton"
+                    Margin="0, 40, 0, 10"
+                    Text="Delete Em"
+                    Clicked="deleteButton_Clicked" />
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

@@ -35,10 +35,15 @@ namespace TakeAttendance.iOS.Dependencies
             try 
             {
                 var collection = Firebase.CloudFirestore.Firestore.SharedInstance.GetCollection("students");
-                var query = collection.WhereEqualsTo("modifiedby", Firebase.Auth.Auth.DefaultInstance.CurrentUser.Email);
+                //var query = collection.WhereEqualsTo("modifiedby", Firebase.Auth.Auth.DefaultInstance.CurrentUser.Email);
+
+                var query = collection.OrderedBy("lastname");
+
                 var documents = await query.GetDocumentsAsync();
 
                 List<Student> students = new List<Student>();
+
+                students.Clear();
 
                 foreach (var doc in documents.Documents)
                 {
@@ -52,6 +57,16 @@ namespace TakeAttendance.iOS.Dependencies
                         LastName = studentdict.ValueForKey(new NSString("lastname")) as NSString,
                         ModifiedBy = studentdict.ValueForKey(new NSString("modifiedby")) as NSString,
                         Created = studentdict.ValueForKey(new NSString("created")) as NSString,
+                        BirthDate = studentdict.ValueForKey(new NSString("birthdate")) as NSString,
+                        Parentg1 = studentdict.ValueForKey(new NSString("parentg1")) as NSString,
+                        Parentg2 = studentdict.ValueForKey(new NSString("parentg2")) as NSString,
+                        AltPhone = studentdict.ValueForKey(new NSString("altphone")) as NSString,
+                        Email = studentdict.ValueForKey(new NSString("email")) as NSString,
+                        Nganh = studentdict.ValueForKey(new NSString("nganh")) as NSString,
+                        ChiDoan = (int)(studentdict.ValueForKey(new NSString("chidoan")) as NSNumber),
+                        Medical = studentdict.ValueForKey(new NSString("medical")) as NSString,
+                        PaidStat = studentdict.ValueForKey(new NSString("paidstat")) as NSString,
+                        Comments = studentdict.ValueForKey(new NSString("comments")) as NSString,
                         Id = doc.Id
                     };
 
@@ -78,7 +93,17 @@ namespace TakeAttendance.iOS.Dependencies
                     new NSString("firstname"),
                     new NSString("lastname"),
                     new NSString("created"),
-                    new NSString("modifiedby"),
+                    new NSString("birthdate"),
+                    new NSString("parentg1"),
+                    new NSString("parentg2"),
+                    new NSString("altphone"),
+                    new NSString("email"),
+                    new NSString("nganh"),
+                    new NSString("chidoan"),
+                    new NSString("medical"),
+                    new NSString("paidstat"),
+                    new NSString("comments"),
+                    new NSString("modifiedby")
                 };
 
                 var values = new NSObject[]
@@ -88,6 +113,16 @@ namespace TakeAttendance.iOS.Dependencies
                     new NSString(student.FirstName),
                     new NSString(student.LastName),
                     new NSString(DateTime.Now.ToShortDateString()),
+                    new NSString(student.BirthDate),
+                    new NSString(student.Parentg1),
+                    new NSString(student.Parentg2),
+                    new NSString(student.AltPhone),
+                    new NSString(student.Email),
+                    new NSString(student.Nganh),
+                    new NSNumber(student.ChiDoan),
+                    new NSString(student.Medical),
+                    new NSString(student.PaidStat),
+                    new NSString(student.Comments),
                     new NSString(Firebase.Auth.Auth.DefaultInstance.CurrentUser.Email)
                 };
 
@@ -116,7 +151,17 @@ namespace TakeAttendance.iOS.Dependencies
                     new NSString("firstname"),
                     new NSString("lastname"),
                     new NSString("created"),
-                    new NSString("modifiedby"),
+                    new NSString("birthdate"),
+                    new NSString("parentg1"),
+                    new NSString("parentg2"),
+                    new NSString("altphone"),
+                    new NSString("email"),
+                    new NSString("nganh"),
+                    new NSString("chidoan"),
+                    new NSString("medical"),
+                    new NSString("paidstat"),
+                    new NSString("comments"),
+                    new NSString("modifiedby")
                 };
 
                 var values = new NSObject[]
@@ -126,6 +171,16 @@ namespace TakeAttendance.iOS.Dependencies
                     new NSString(student.FirstName),
                     new NSString(student.LastName),
                     new NSString(student.Created),
+                    new NSString(student.BirthDate),
+                    new NSString(student.Parentg1),
+                    new NSString(student.Parentg2),
+                    new NSString(student.AltPhone),
+                    new NSString(student.Email),
+                    new NSString(student.Nganh),
+                    new NSNumber(student.ChiDoan),
+                    new NSString(student.Medical),
+                    new NSString(student.PaidStat),
+                    new NSString(student.Comments),
                     new NSString(Firebase.Auth.Auth.DefaultInstance.CurrentUser.Email)
                 };
 

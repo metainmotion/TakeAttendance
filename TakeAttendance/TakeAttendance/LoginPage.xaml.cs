@@ -16,6 +16,7 @@ namespace TakeAttendance
         public LoginPage()
         {
             InitializeComponent();
+           
         }
 
         private async void loginButton_Clicked(object sender, EventArgs e)

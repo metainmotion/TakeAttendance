@@ -23,6 +23,7 @@ namespace TakeAttendance
 
             var students = await FirestoreHelper.Read();
             listOfStudents.ItemsSource = students;
+
         }
 
         private void listOfStudents_ItemSelected(object sender, SelectedItemChangedEventArgs e)

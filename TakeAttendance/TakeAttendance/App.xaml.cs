@@ -11,6 +11,7 @@ namespace TakeAttendance
             InitializeComponent();
 
             MainPage = new NavigationPage(new LoginPage());
+             
         }
 
         protected override void OnStart()
@@ -24,5 +25,6 @@ namespace TakeAttendance
         protected override void OnResume()
         {
         }
+
     }
 }

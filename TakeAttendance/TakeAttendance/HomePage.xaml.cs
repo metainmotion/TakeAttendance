@@ -15,6 +15,7 @@ namespace TakeAttendance
         public HomePage()
         {
             InitializeComponent();
+
         }
 
         private void registerStudent_Clicked(object sender, EventArgs e)

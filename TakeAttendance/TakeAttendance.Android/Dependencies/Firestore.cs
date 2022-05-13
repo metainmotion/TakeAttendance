@@ -31,16 +31,25 @@ namespace TakeAttendance.Droid.Dependencies
 
         public async Task<bool> Delete(Student student)
         {
-            try
-            {
-                var collection = FirebaseFirestore.Instance.Collection("students");
+            var deletePrompt = await App.Current.MainPage.DisplayAlert("Delete Student", "Are you sure?", "Yes", "Cancel");
 
-                collection.Document(student.Id).Delete();
+            if (deletePrompt)
+            { 
+                try
+                {
+                    var collection = FirebaseFirestore.Instance.Collection("students");
 
-                return true;
+                    collection.Document(student.Id).Delete();
+                
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
             }
-            catch (Exception ex)
-            {
+            else
+            { 
                 return false;
             }
         }
@@ -62,6 +71,16 @@ namespace TakeAttendance.Droid.Dependencies
                         FirstName = doc.Get("firstname").ToString(),
                         LastName = doc.Get("lastname").ToString(),
                         Created = doc.Get("created").ToString(),
+                        BirthDate = doc.Get("birthdate").ToString(),
+                        Parentg1 = doc.Get("parentg1").ToString(),
+                        Parentg2 = doc.Get("parentg2").ToString(),
+                        AltPhone = doc.Get("altphone").ToString(),
+                        Email = doc.Get("email").ToString(),
+                        Nganh = doc.Get("nganh").ToString(),
+                        ChiDoan = (int)doc.Get("chidoan"),
+                        Medical = doc.Get("medical").ToString(),
+                        PaidStat = doc.Get("paidstat").ToString(),
+                        Comments = doc.Get("comments").ToString(),
                         ModifiedBy = doc.Get("modifiedby").ToString(),
                         Id = doc.Id
                     };
@@ -83,11 +102,12 @@ namespace TakeAttendance.Droid.Dependencies
 
             var collection = Firebase.Firestore.FirebaseFirestore.Instance.Collection("students");
 
-            var query = collection.WhereEqualTo("modifiedby", Firebase.Auth.FirebaseAuth.Instance.CurrentUser.Email);
+            //var query = collection.WhereEqualTo("modifiedby", Firebase.Auth.FirebaseAuth.Instance.CurrentUser.Email);
+            var query = collection.WhereNotEqualTo("username", "");
 
             query.Get().AddOnCompleteListener(this);
 
-            for(int i = 0; i < 20; i++)
+            for(int i = 0; i < 15; i++)
             {
                 await System.Threading.Tasks.Task.Delay(100);
                 if (hasReadStudents)
@@ -107,7 +127,17 @@ namespace TakeAttendance.Droid.Dependencies
                     {"phone", student.Phone },
                     {"firstname", student.FirstName },
                     {"lastname", student.LastName },
-                    {"created" , DateTime.Now.ToShortDateString()},
+                    {"created", DateTime.Now.ToShortDateString()},
+                    {"birthdate", student.BirthDate },
+                    {"parentg1", student.Parentg1 },
+                    {"parentg2", student.Parentg2 },
+                    {"altphone", student.AltPhone },
+                    {"email", student.Email },
+                    {"nganh", student.Nganh },
+                    {"chidoan", student.ChiDoan },
+                    {"medical", student.Medical },
+                    {"paidstat", student.PaidStat },
+                    {"comments", student.Comments },
                     {"modifiedby", Firebase.Auth.FirebaseAuth.Instance.CurrentUser.Email }
                 };
 
@@ -134,6 +164,16 @@ namespace TakeAttendance.Droid.Dependencies
                     {"firstname", student.FirstName },
                     {"lastname", student.LastName },
                     {"created" , student.Created},
+                    {"birthdate", student.BirthDate },
+                    {"parentg1", student.Parentg1 },
+                    {"parentg2", student.Parentg2 },
+                    {"altphone", student.AltPhone },
+                    {"email", student.Email },
+                    {"nganh", student.Nganh },
+                    {"chidoan", student.ChiDoan },
+                    {"medical", student.Medical },
+                    {"paidstat", student.PaidStat },
+                    {"comments", student.Comments },
                     {"modifiedby", Firebase.Auth.FirebaseAuth.Instance.CurrentUser.Email }
                 };
 

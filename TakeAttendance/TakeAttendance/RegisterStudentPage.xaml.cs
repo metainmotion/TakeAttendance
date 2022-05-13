@@ -26,7 +26,17 @@ namespace TakeAttendance
                     Username = $"{(firstname.Text.Length >= 2 ? firstname.Text.Substring(0, 2) : firstname.Text)}{(lastname.Text.Length >= 5 ? lastname.Text.Substring(0, 5) : lastname.Text)}{(phone.Text.Length > 0 ? phone.Text.Substring(3, 7) : phone.Text)}",
                     FirstName = firstname.Text,
                     LastName = lastname.Text,
-                    Phone = phone.Text.Length > 0 ? phone.Text : ""
+                    Phone = phone.Text.Length > 0 ? phone.Text : "",
+                    BirthDate = birthdate.Date.ToShortDateString(),
+                    Parentg1 = parentg1.Text,
+                    Parentg2 = parentg2.Text,
+                    AltPhone = phone.Text.Length > 0 ? phone.Text : null,
+                    Email = email.Text,
+                    Nganh = nganh.SelectedItem.ToString(),
+                    ChiDoan = (int)chidoan.SelectedItem,
+                    Medical = medical.Text,
+                    PaidStat = paidstat.SelectedItem.ToString(),
+                    Comments = comments.Text
                 };
 
                 bool result = FirestoreHelper.RegisterStudent(student);
@@ -37,6 +47,15 @@ namespace TakeAttendance
                     firstname.Text = "";
                     lastname.Text = "";
                     phone.Text = "";
+                    parentg1.Text = "";
+                    parentg2.Text = "";
+                    altphone.Text = "";
+                    email.Text = "";
+                    nganh.SelectedIndex = 0;
+                    chidoan.SelectedIndex = 0;
+                    medical.Text = "";
+                    paidstat.SelectedIndex = 0;
+                    comments.Text = "";
                 }
                 else
                 {
@@ -48,11 +67,6 @@ namespace TakeAttendance
                 DisplayAlert("Error", "Do not leave fields blank", "Ok");
             }
 
-        }
-
-        private void goBackHome_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new HomePage());
         }
 
         private void toolbarHome_Clicked(object sender, EventArgs e)
